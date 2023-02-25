@@ -42,6 +42,9 @@
         <div class="card-header">
           <i class="bi bi-info-circle"></i>
           イベントの説明
+            <% if @event.only_woman %>
+              <p>女性限定</p>
+            <% end %>
         </div>
         <div class="card-body">
           <%= simple_format @event.content %>
@@ -93,12 +96,21 @@
                               data: { confirm: 'キャンセルします' }
                   %>
                 <% else %>
-                  <%= link_to 'このもくもく会に参加する',
-                              event_attendance_url(@event),
-                              class: 'btn btn-primary',
-                              method: :post,
-                              data: { confirm: '申し込みます' }
-                  %>
+                  <% if @event.only_woman == true && current_user.gender == 'woman' %>
+                    <%= link_to 'このもくもく会に参加する',
+                                event_attendance_url(@event),
+                                class: 'btn btn-primary',
+                                method: :post,
+                                data: { confirm: '申し込みます' }
+                    %>
+                  <% elseif current_user.gender == 'woman' || current_user.gender == 'man' || current_user.gender == 'other' && @event.only_woman == false %>
+                    <%= link_to 'このもくもく会に参加する',
+                                event_attendance_url(@event),
+                                class: 'btn btn-primary',
+                                method: :post,
+                                data: { confirm: '申し込みます' }
+                    %>
+                  <% end %>
                 <% end %>
               <% end %>
             <% end %>
@@ -111,9 +123,9 @@
           参加者（<%= @event.attendees.size %>人）
         </div>
         <div class="card-body">
-           <ul class="list-unstyled">
-             <%= render partial: 'events/attendee', collection: @event.attendees %>
-           </ul>
+          <ul class="list-unstyled">
+            <%= render partial: 'events/attendee', collection: @event.attendees %>
+          </ul>
         </div>
       </div>
 

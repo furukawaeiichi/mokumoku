@@ -21,7 +21,7 @@
             </div>
             <div class="mb-3">
               <%= f.label :gender %>
-                <%= f.select :gender, [['Other', 'other'], ['Man', 'man'], ['Woman', 'woman']] %>
+                <%= f.select :gender, User.genders.keys.map {|k| [t("enams.user.gender.#{k}"), k]} %>
               </div>
             <div class="mb-3">
               <%= f.label :email %>

@@ -62,6 +62,10 @@ class User < ApplicationRecord
     event.user_id == id
   end
 
+  def woman(user)
+    gender = "woman"
+  end
+
   def allow_created_event_notification?
     notification_timings.created_event.present?
   end
