@@ -21,8 +21,8 @@
             </div>
             <div class="mb-3">
               <%= f.label :gender %>
-                <%= f.select :gender, User.genders.keys.map {|k| [t("enams.user.gender.#{k}"), k]} %>
-              </div>
+              <%= f.select :gender, User.genders.keys.map {|k| [t("enums.user.gender.#{k}"), k]} %>
+            </div>
             <div class="mb-3">
               <%= f.label :email %>
               <%= f.email_field :email, class: 'form-control' %>
