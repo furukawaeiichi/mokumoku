@@ -95,14 +95,7 @@
                             data: { confirm: 'キャンセルします' }
                 %>
               <% else %>
-                <% if !@event.only_woman? %>
-                  <%= link_to 'このもくもく会に参加する',
-                              event_attendance_url(@event),
-                              class: 'btn btn-primary',
-                              method: :post,
-                              data: { confirm: '申し込みます' }
-                  %>
-                <% elsif @event.only_woman? && current_user.woman? %>
+                <% if !@event.only_woman? || (@event.only_woman? && current_user.woman?) %>
                   <%= link_to 'このもくもく会に参加する',
                               event_attendance_url(@event),
                               class: 'btn btn-primary',
